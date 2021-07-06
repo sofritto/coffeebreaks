@@ -3,7 +3,7 @@ from numpy.random import choice, randint, uniform
 from numpy import ceil, zeros
 
 class GenAlg:
-    def __init__(self, data, pickle_path='result_pickle.pkl', n=10000, mating_rate=0.3, mutation_rate=0.1):
+    def __init__(self, data, pickle_path='results.pkl', n=10000, mating_rate=0.3, mutation_rate=0.1):
         self.data = data
         self.pickle_path = pickle_path
         self.n = n
@@ -24,7 +24,7 @@ class GenAlg:
                 print('GENERATION {}'.format(self.generation))
                 print('Best Fitness: {}\n'.format(last_generation.iloc[0]['Fitness']))
         except KeyboardInterrupt:
-            last_generation.to_pickle(self.pickle_path)
+            last_generation.drop('New').reset_index().to_pickle(self.pickle_path)
 
     def mutation(self):
         individs_to_mutate = self.population.sample(frac=self.mutation_rate)
