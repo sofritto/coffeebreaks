@@ -24,7 +24,7 @@ class GenAlg:
                 print('GENERATION {}'.format(self.generation))
                 print('Best Fitness: {}\n'.format(last_generation.iloc[0]['Fitness']))
         except KeyboardInterrupt:
-            last_generation.drop('New').reset_index().to_pickle(self.pickle_path)
+            last_generation.drop(['New'], axis=1).reset_index().to_pickle(self.pickle_path)
 
     def mutation(self):
         individs_to_mutate = self.population.sample(frac=self.mutation_rate)
